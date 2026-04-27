@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ menu.name }}</title>
+    <style>
+        body { font-family: sans-serif; background: #fff; margin: 0; padding: 0; color: #333; line-height: 1.6; }
+        .header { position: relative; }
+        .back-btn { position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.5); color: white; padding: 8px 15px; border-radius: 20px; text-decoration: none; font-size: 0.8rem; }
+        .main-img { width: 100%; height: 300px; object-fit: cover; display: block; }
+        
+        .content { padding: 20px; max-width: 600px; margin: auto; }
+        h1 { margin: 0 0 15px 0; border-left: 5px solid #6d4c41; padding-left: 10px; font-size: 1.5rem; }
+        
+        .section { margin-bottom: 20px; border-radius: 10px; padding: 15px; }
+        .hot { background: #fff5f5; border-left: 5px solid #d9534f; }
+        .ice { background: #f0f8ff; border-left: 5px solid #5bc0de; }
+        .recipe { background: #f9f9f9; border-left: 5px solid #666; }
+        
+        h3 { margin-top: 0; font-size: 1rem; display: flex; align-items: center; gap: 5px; }
+        p { margin: 0; white-space: pre-wrap; font-size: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="/" class="back-btn">← 戻る</a>
+        {% if menu.image %}
+          <img src="{{ menu.image }}" class="main-img">
+        {% else %}
+          <div style="height:100px; background:#6d4c41;"></div>
+        {% endif %}
+    </div>
+
+    <div class="content">
+        <h1>{{ menu.name }}</h1>
+
+        {% if menu.hot %}
+          <div class="section hot">
+            <h3>♨️ ホットの作り方</h3>
+            <p>{{ menu.hot }}</p>
+          </div>
+        {% endif %}
+
+        {% if menu.ice %}
+          <div class="section ice">
+            <h3>🧊 アイスの作り方</h3>
+            <p>{{ menu.ice }}</p>
+          </div>
+        {% endif %}
+
+        {% if menu.recipe %}
+          <div class="section recipe">
+            <h3>📖 手順 / レシピ</h3>
+            <p>{{ menu.recipe }}</p>
+          </div>
+        {% endif %}
+    </div>
+</body>
+</html>

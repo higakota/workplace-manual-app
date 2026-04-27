@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理画面 - Cafe Manual</title>
+    <style>
+        :root { --primary: #6d4c41; --bg: #f8f5f2; }
+        body { font-family: sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 800px; margin: auto; }
+        h1 { color: var(--primary); text-align: center; font-size: 1.4rem; }
+        
+        .form-box { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: var(--primary); font-size: 0.9rem; margin-top: 15px; }
+        
+        input[type="text"], select, textarea {
+            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; outline: none; font-size: 1rem;
+        }
+        textarea { min-height: 120px; resize: vertical; }
+        
+        .btn-save { background: var(--primary); color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 20px; }
+        .btn-cancel { background: #999; color: white; border: none; padding: 10px; width: 100%; border-radius: 10px; margin-top: 10px; cursor: pointer; }
+
+        /* 一覧リスト */
+        .menu-list-admin { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .menu-item-row { display: flex; align-items: center; justify-content: space-between; padding: 15px; border-bottom: 1px solid #eee; }
+        .menu-name { font-weight: bold; }
+        .actions { display: flex; gap: 10px; }
+        .btn-edit { color: #007bff; text-decoration: none; font-size: 0.9rem; cursor: pointer; background: none; border: 1px solid #007bff; padding: 5px 10px; border-radius: 5px; }
+        .btn-del { color: #dc3545; text-decoration: none; font-size: 0.9rem; border: 1px solid #dc3545; padding: 5px 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛠 マニュアル管理</h1>
+        <p style="text-align:center;"><a href="/" style="color:#666;">← 公開ページへ戻る</a></p>
+
+        <div class="form-box">
+            <form action="/admin/save" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id" id="edit-id">
+                <input type="hidden" name="existing_image" id="edit-existing-image">
+                
+                <label>メニュー名</label>
+                <input type="text" name="name" id="edit-name" required placeholder="例：カフェラテ">
+                
+                <label>カテゴリ</label>
+                <select name="category" id="edit-category">
+                    <option value="drink">☕ ドリンク</option>
+                    <option value="food">🍳 フード</option>
+                    <option value="closing">🧹 締め作業</option>
+                    <option value="other">💡 その他</option>
+                </select>
+
+                <label>手順 / レシピ (共通)</label>
+                <textarea name="recipe" id="edit-recipe" placeholder="作り方の手順を入力..."></textarea>
+
+                <label>♨️ ホット用 (任意)</label>
+                <textarea name="hot" id="edit-hot" style="min-height:60px;"></textarea>
+
+                <label>🧊 アイス用 (任意)</label>
+                <textarea name="ice" id="edit-ice" style="min-height:60px;"></textarea>
+
+                <label>📸 写真 (変更する場合のみ選択)</label>
+                <input type="file" name="image" accept="image/*">
+
+                <button type="submit" class="btn-save">この内容で保存する</button>
+                <button type="button" class="btn-cancel" onclick="location.reload()">入力をリセット</button>
+            </form>
+        </div>
+
+        <div class="menu-list-admin">
+            {% for id, menu in menus.items() %}
+            <div class="menu-item-row">
+                <span class="menu-name">{{ menu.name }}</span>
+                <div class="actions">
+                    <button class="btn-edit" onclick="editMenu('{{id}}', '{{menu.name}}', '{{menu.category}}', `{{menu.recipe}}`, `{{menu.hot}}`, `{{menu.ice}}`, '{{menu.image}}')">編集</button>
+                    <a href="/admin/delete/{{ id }}" class="btn-del" onclick="return confirm('本当に削除しますか？')">削除</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+    function editMenu(id, name, cat, recipe, hot, ice, img) {
+        document.getElementById('edit-id').value = id;
+        document.getElementById('edit-name').value = name;
+        document.getElementById('edit-category').value = cat;
+        document.getElementById('edit-recipe').value = recipe;
+        document.getElementById('edit-hot').value = hot;
+        document.getElementById('edit-ice').value = ice;
+        document.getElementById('edit-existing-image').value = img;
+        window.scrollTo({top: 0, behavior: 'smooth'}); // スムーズに上に戻る
+    }
+    </script>
+</body>
+</html>
