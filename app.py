@@ -1,5 +1,6 @@
 import json
 import os
+import uuid
 from flask import Flask, render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
@@ -53,9 +54,15 @@ def save_item():
     image_url = request.form.get('existing_image', '')
     
     if file and file.filename != '':
+        
         filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        image_url = '/static/uploads/' + filename
+        ext = os.path.splitext(filename)[1]
+        
+        
+        new_filename = str(uuid.uuid4()) + ext
+        
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], new_filename))
+        image_url = '/static/uploads/' + new_filename
 
     new_data = {
         "name": request.form.get("name"),
