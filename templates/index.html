@@ -57,7 +57,7 @@
     </style>
 </head>
 <body>
-    <h1>☕ Cafe Manual</h1>
+    <h1>Cafe Manual</h1>
 
     <form class="search-container" action="/search" method="get">
         <input type="text" name="q" value="{{ query or '' }}" placeholder="メニューを検索...">
@@ -66,10 +66,10 @@
 
     <div class="tabs">
         <button class="tab-btn active" onclick="filterCat('all', this)">すべて</button>
-        <button class="tab-btn" onclick="filterCat('drink', this)">☕ ドリンク</button>
-        <button class="tab-btn" onclick="filterCat('food', this)">🍳 フード</button>
-        <button class="tab-btn" onclick="filterCat('closing', this)">🧹 締め作業</button>
-        <button class="tab-btn" onclick="filterCat('other', this)">💡 その他</button>
+        <button class="tab-btn" onclick="filterCat('drink', this)">ドリンク</button>
+        <button class="tab-btn" onclick="filterCat('food', this)">フード</button>
+        <button class="tab-btn" onclick="filterCat('closing', this)">締め作業</button>
+        <button class="tab-btn" onclick="filterCat('other', this)">その他</button>
     </div>
 
     <div class="menu-grid" id="menu-list">
