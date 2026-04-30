@@ -5,7 +5,7 @@
         "recipe": "",
         "hot": "1. ミルクピッチャーで牛乳140mlを65℃目安でスチームする。 \r\n2. エスプレッソ30mlをカップに抽出する。 \r\n3. きめ細かい泡（フォーム）を1cmほど乗せるように注ぐ。",
         "ice": "1. グラスに氷を8分目まで入れる。 \r\n2. 冷たい牛乳150mlを注ぐ。 \r\n3. 上からエスプレッソ30mlを静かに注ぎ、綺麗な2層（セパレート）を作る。",
-        "image": "/static/uploads/8f26b531-7113-4800-a961-7741887c9ae4"
+        "image": "/static/uploads/2d05bdd3-8b76-4ccb-aa6c-fe3bca3d3aa0.png"
     },
     "2": {
         "name": "ブレンドコーヒー",
@@ -13,7 +13,7 @@
         "recipe": "1. カップを温める。 \r\n2. コーヒー豆12gを使用し、中挽きで挽く。 \r\n3. 92℃のお湯150mlを3回に分けて注ぐ。",
         "hot": "",
         "ice": "",
-        "image": "/static/uploads/b02bee84-aba7-4c1c-a789-e136f7b53d93"
+        "image": "/static/uploads/e92b2ec1-77ad-4cd8-af23-542cf6631d94.png"
     },
     "3": {
         "name": "厚切りバタートースト",
@@ -21,7 +21,7 @@
         "recipe": "1. 4枚切りの食パンをトースターで3分焼く。 \r\n2. 表面に格子状の切れ目を入れる。 \r\n3. バター10gを均一に塗る。",
         "hot": "",
         "ice": "",
-        "image": "/static/uploads/0680aa53-650b-471e-94e4-45da696a235f"
+        "image": "/static/uploads/a71917d7-3afd-4951-b8ce-12c1c07b731f.png"
     },
     "4": {
         "name": "欧風カレー",
@@ -29,7 +29,7 @@
         "recipe": "1.レトルトパウチを湯せんで5分温める。\r\n\r\n2.ライスは専用しゃもじ2杯分（約200g）をラグビーボール型に盛り付ける。\r\n\r\n3.ルーをライスの右半分にかけ、仕上げにパセリを振る。",
         "hot": "",
         "ice": "",
-        "image": "/static/uploads/35a5c9ba-9de2-475e-aaca-a7de420fb3be"
+        "image": "/static/uploads/9f03363c-6f77-48bd-995f-35dab17d10ba.png"
     },
     "5": {
         "name": "自家製レモネード",
@@ -37,7 +37,7 @@
         "recipe": "1. レモンシロップ30mlをグラスに入れる。 \r\n2. 炭酸水200mlを注ぐ。 \r\n3. スライスレモンを添えて、軽くステアする。",
         "hot": "",
         "ice": "",
-        "image": "/static/uploads/b8824697-a71c-4d13-8b7b-d9fdee6779c1"
+        "image": "/static/uploads/8e81048d-4f02-40c5-a6a7-90d99b362090.png"
     },
     "6": {
         "name": "サンドイッチ",
@@ -45,7 +45,7 @@
         "recipe": "1. レタス、ハム、たまごサラダをパンで挟む。 \r\n2. 耳を切り落とし、4等分の三角形にカットする。 \r\n3. 断面が綺麗に見えるよう皿に盛る。",
         "hot": "",
         "ice": "",
-        "image": "/static/uploads/57a4731b-2c01-4a1d-a6b8-975b3d79bfe2"
+        "image": "/static/uploads/6047720f-1ba3-460b-b4cf-1b126d204493.png"
     },
     "7": {
         "name": "レジ締め・精算",
