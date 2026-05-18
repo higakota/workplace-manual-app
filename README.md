@@ -3,7 +3,7 @@
 
 **公開URL:** [https://workplace-manual-app.onrender.com](https://workplace-manual-app.onrender.com)  
 *(※無料プランのため、起動に30秒〜1分ほどかかる場合があります)*
-*ログインパスワード[cafe2026]*
+**ログインパスワード[cafe2026]**
 
 ## 概要
 アルバイト先の「紙のマニュアル特有の不便さ」を解消するために開発した、FlaskベースのWebアプリケーションです。  
