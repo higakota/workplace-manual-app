@@ -1,10 +1,16 @@
 import json
 import os
 import uuid
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
+
+app.secret_key = 'cafe_manual_secret_key_9988' 
+
+
+SHARED_PASSWORD = "cafe2026" 
+
 DATA_FILE = 'menus.json'
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -23,19 +29,51 @@ def save_menus(menus):
     with open(DATA_FILE, 'w', encoding='utf-8') as f:
         json.dump(menus, f, ensure_ascii=False, indent=4)
 
+
+def is_logged_in():
+    return session.get('authenticated') is True
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if is_logged_in():
+        return redirect(url_for('index'))
+        
+    if request.method == "POST":
+        pwd = request.form.get("password")
+        if pwd == SHARED_PASSWORD:
+            session['authenticated'] = True
+            return redirect(url_for('index'))
+        else:
+            flash("パスワードが正しくありません。")
+            
+    return render_template("login.html")
+
+@app.route("/logout")
+def logout():
+    session.pop('authenticated', None)
+    return redirect(url_for('login'))
+
+
 @app.route("/")
 def index():
+    if not is_logged_in():
+        return redirect(url_for('login'))
     menus = load_menus()
     return render_template("index.html", menus=menus)
 
 @app.route("/menu/<int:menu_id>")
 def detail(menu_id):
+    if not is_logged_in():
+        return redirect(url_for('login'))
     menus = load_menus()
     menu = menus.get(menu_id)
     return render_template("detail.html", menu=menu)
 
 @app.route("/search")
 def search():
+    if not is_logged_in():
+        return redirect(url_for('login'))
     menus = load_menus()
     query = request.args.get("q", "")
     results = {id: m for id, m in menus.items() if query.lower() in m["name"].lower()}
@@ -43,24 +81,24 @@ def search():
 
 @app.route("/admin")
 def admin():
+    if not is_logged_in():
+        return redirect(url_for('login'))
     menus = load_menus()
     return render_template("admin.html", menus=menus)
 
 @app.route("/admin/save", methods=["POST"])
 def save_item():
+    if not is_logged_in():
+        return redirect(url_for('login'))
     menus = load_menus()
     menu_id = request.form.get("id")
     file = request.files.get('image')
     image_url = request.form.get('existing_image', '')
     
     if file and file.filename != '':
-        
         filename = secure_filename(file.filename)
         ext = os.path.splitext(filename)[1]
-        
-        
         new_filename = str(uuid.uuid4()) + ext
-        
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], new_filename))
         image_url = '/static/uploads/' + new_filename
 
@@ -84,6 +122,8 @@ def save_item():
 
 @app.route("/admin/delete/<int:menu_id>")
 def delete_item(menu_id):
+    if not is_logged_in():
+        return redirect(url_for('login'))
     menus = load_menus()
     if menu_id in menus:
         del menus[menu_id]

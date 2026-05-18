@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログイン - Cafe Manual</title>
+    <style>
+        :root {
+            --primary-color: #6d4c41;
+            --bg-color: #f8f5f2;
+            --card-bg: #ffffff;
+        }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: var(--bg-color); margin: 0; padding: 20px; color: #333; display: flex; align-items: center; justify-content: center; min-height: 80vh; }
+        .login-box { background: var(--card-bg); padding: 30px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 100%; max-width: 360px; text-align: center; }
+        h1 { color: var(--primary-color); font-size: 1.4rem; margin-bottom: 20px; }
+        input[type="password"] { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; outline: none; font-size: 1rem; margin-bottom: 15px; text-align: center; }
+        button { background: var(--primary-color); color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+        .error-msg { color: #dc3545; font-size: 0.85rem; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h1>🔒 関係者認証</h1>
+        
+        
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="error-msg">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form action="/login" method="post">
+            <input type="password" name="password" placeholder="パスワードを入力" required autofocus>
+            <button type="submit">ログイン</button>
+        </form>
+    </div>
+</body>
+</html>
